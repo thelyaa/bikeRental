@@ -1,0 +1,32 @@
+{
+  "name": "bikerental",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thelyaa/bikeRental.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thelyaa/bikeRental/issues"
+  },
+  "homepage": "https://github.com/thelyaa/bikeRental#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.13"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
