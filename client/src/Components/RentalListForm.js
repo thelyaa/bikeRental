@@ -42,12 +42,17 @@ export default class RentalListForm extends React.Component {
                         <tr>
                             <td>{item.userName}</td>
                             <td>{item.pin}</td>
-                            <td>{item.finished}</td>
                             {item.active === true ? (
-                                <td><button>Active</button></td>
+                                <td>{item.created}</td>
                             ):""}
                             {item.active === false ? (
-                                <td>Завершено</td>
+                                <td>{item.finished}</td>
+                            ):""}
+                            {item.active === true ? (
+                                <td>Active</td>
+                            ):""}
+                            {item.active === false ? (
+                                <td>Finished</td>
                             ):""}                          
                         </tr>
                     )
