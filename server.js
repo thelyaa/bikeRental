@@ -4,7 +4,7 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const Math = require('mathjs')
 app.use(cors());
 
 mongoose.connect('mongodb+srv://thelyaa:Fkm,tlj1@cluster0.lxn7u.mongodb.net/bikeRental', {
@@ -70,7 +70,8 @@ app.post('/getUserName', (req, res) => {
 })
 
 app.post('/finishRental', (req, res) => {
-    RentalList.updateOne({_pin: req.query.pin}, {_active: false}, function(err, result){
+    var datetime = new Date();
+    RentalList.updateOne({_pin: req.query.pin}, {_active: false, _finishedDate: datetime}, function(err, result){
         console.log(result)
     })
 })
@@ -87,19 +88,29 @@ app.post('/getUserRentals', (req, res) => {
 
 app.post('/rentalBike', (req, res) => {
     var datetime = new Date();
-    console.log(datetime);
-    UserModel.find({_email: req.query.email}, function(err, result){
-        RentalList.create({
-            _pin: "567",
-            _userId: result[0]._id,
-            _userName: result[0]._firstName+' '+result[0]._lastName,
-            _finishedDate: null,
-            _createdDate: datetime
-        }, function(err, data){
-            console.log(data)
-            if (err) console.log(err)
+    var min = Math.ceil(111);
+    var max = Math.floor(999);
+    var rnd = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+    RentalList.find({_pin: rnd, _active: false}, function(err, rental){
+        UserModel.find({_email: req.query.email}, function(err, result){
+            RentalList.find({_userId: result[0]._id, _active: true}, function(err, active){
+                if (active.length > 0) {res.send("error"); console.log("ac", active)}
+                else{
+                    RentalList.create({
+                        _pin: rnd,
+                        _userId: result[0]._id,
+                        _userName: result[0]._firstName+' '+result[0]._lastName,
+                        _finishedDate: null,
+                        _createdDate: datetime,
+                        _active: true
+                    }, function(err, data){
+                        if (err) console.log(err)
+                    })
+                }
+            })      
         })
-    })
+    })    
 })
 const PORT = 9000
 

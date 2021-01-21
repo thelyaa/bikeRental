@@ -17,6 +17,10 @@ export default class UserinfoForm extends React.Component {
                 email: this.props.email
             }
         }).then((data) => {
+            console.log(data)
+            if (data.data === "error"){
+                alert("У Вас есть незаконченные поездки")
+            }
             
         })
     }
@@ -70,30 +74,39 @@ export default class UserinfoForm extends React.Component {
                 </p>
                 <div>
                     <button onClick={this.rentalBikeFunction}>Прокат</button>
-                    <button>Cancel</button>
                 </div>
                 
                 <div>
                     <table>
                         <tr>
                             <th>PIN</th>
-                            <th>Finished Date</th>
+                            <th>Date</th>
+                            <th>Active</th>
                         </tr>
                         {console.log(this.props.rentalList)}
-                        {this.props.rentalList.map((item) => {
+                        {this.props.rentalList.length !== 0 ? ( 
+                            this.props.rentalList.map((item) => {
                             return(
                                 <tr>
                                     <td>{item.pin}</td>
-                                    {item.finshedDate === undefined ? (
+                                    {item.finishedDate === undefined ? (
                                         <td>{item.created}</td>
                                     ):""}
-                                    {item.finshedDate !== null ? (
+                                    {item.finishedDate !== null ? (
                                         <td>{item.finishedDate}</td>
+                                    ):""}
+                                   
+                                    {item.finishedDate !== null && item.created === undefined ? (
+                                        <td>Finished</td>
                                     ):""}
                                 </tr>
                             )
-                        })}
+                        }) ):""}
                     </table>
+                </div>
+                
+                <div>
+                    <button onClick={this.props.userinfoHandler}>OK</button>
                 </div>
             </div>
         )

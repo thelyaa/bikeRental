@@ -21,7 +21,8 @@ export default class RegisterForm extends React.Component {
             [event.target.name]: event.target.value
         });
     }
-
+    
+    rentalList = []
     registerFunction = (e) => {
         if (this.state.password !== this.state.repeatPassword) alert("Пароли не совпадают")
         else if (this.state.firstName === "" || this.state.lastName === "" || this.state.email === "" || this.state.password === "" || this.state.repeatPassword === "") alert("Не все поля заполнены")
@@ -35,7 +36,8 @@ export default class RegisterForm extends React.Component {
                 }
             }).then((data) => {
                 console.log(data.data)
-                this.props.successRegistrationHandler(this.state.firstName, this.state.lastName, this.state.email, this.state.password)
+//                this.rentalList.push({})
+                this.props.successRegistrationHandler(this.state.firstName, this.state.lastName, this.state.email, this.state.password, "user", "")
             })
         }
     }
