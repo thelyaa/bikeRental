@@ -26,7 +26,9 @@ const RentalList = mongoose.model('rentals', new Schema({
     _pin: String,
     _userId: mongoose.Types.ObjectId,
     _active: Boolean,
-    _finishedDate: Date
+    _finishedDate: Date,
+    _userName: String,
+    _createdDate: Date
 }))
 
 app.post('/signInFunction', (req, res) => {
@@ -73,6 +75,32 @@ app.post('/finishRental', (req, res) => {
     })
 })
 
+app.post('/getUserRentals', (req, res) => {
+   UserModel.find({_email: req.query.email}, function(err, result){
+       console.log(result[0]._id)
+       RentalList.find({_userId: result[0]._id}, function(err, data){
+           console.log(data)
+           res.send(data)
+       })
+   }) 
+})
+
+app.post('/rentalBike', (req, res) => {
+    var datetime = new Date();
+    console.log(datetime);
+    UserModel.find({_email: req.query.email}, function(err, result){
+        RentalList.create({
+            _pin: "567",
+            _userId: result[0]._id,
+            _userName: result[0]._firstName+' '+result[0]._lastName,
+            _finishedDate: null,
+            _createdDate: datetime
+        }, function(err, data){
+            console.log(data)
+            if (err) console.log(err)
+        })
+    })
+})
 const PORT = 9000
 
 app.listen(PORT, () => console.log('server started'));

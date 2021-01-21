@@ -18,7 +18,7 @@ export default class App extends React.Component {
     
     setUserData(firstName, lastName, email, password, role, rentalList){
         if (role === "admin") this.setState({currentScreen: 3, rentalList: rentalList})
-        else this.setState({firstName: firstName, lastName: lastName, email: email, password: password, currentScreen: 2, role: role})
+        else this.setState({firstName: firstName, lastName: lastName, email: email, password: password, currentScreen: 2, role: role, rentalList: rentalList})
         console.log("rental", this.state.rentalList)
     }
     
@@ -37,7 +37,8 @@ export default class App extends React.Component {
                     firstName={this.state.firstName}
                     lastName={this.state.lastName}
                     email={this.state.email}
-                    password={this.state.password}/>
+                    password={this.state.password}
+                    rentalList={this.state.rentalList}/>
                 ):""}
                 {this.state.currentScreen === 3 ? (
                     <RentalListForm 

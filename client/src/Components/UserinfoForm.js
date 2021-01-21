@@ -13,6 +13,10 @@ export default class UserinfoForm extends React.Component {
     
     rentalBikeFunction = (e) => {
         axios.post('http://localhost:9000/rentalBike', null, {
+            params: {
+                email: this.props.email
+            }
+        }).then((data) => {
             
         })
     }
@@ -67,6 +71,29 @@ export default class UserinfoForm extends React.Component {
                 <div>
                     <button onClick={this.rentalBikeFunction}>Прокат</button>
                     <button>Cancel</button>
+                </div>
+                
+                <div>
+                    <table>
+                        <tr>
+                            <th>PIN</th>
+                            <th>Finished Date</th>
+                        </tr>
+                        {console.log(this.props.rentalList)}
+                        {this.props.rentalList.map((item) => {
+                            return(
+                                <tr>
+                                    <td>{item.pin}</td>
+                                    {item.finshedDate === undefined ? (
+                                        <td>{item.created}</td>
+                                    ):""}
+                                    {item.finshedDate !== null ? (
+                                        <td>{item.finishedDate}</td>
+                                    ):""}
+                                </tr>
+                            )
+                        })}
+                    </table>
                 </div>
             </div>
         )

@@ -22,6 +22,7 @@ export default class LoginForm extends React.Component {
     
     rentalList = []
     pin = ""
+    userId = ""
     signInFunction = (e) => {
         this.setState({email: this.state.email})
         axios.post('http://localhost:9000/signInFunction', null, {
@@ -31,23 +32,49 @@ export default class LoginForm extends React.Component {
             }
         }).then((data) => {
             if (data.data.length > 0){
-//                console.log("success")
-//                console.log(data.data[0]._role)
                 if (data.data[0]._role === "admin"){
-                    axios.get('http://localhost:9000/getRentalList').then((res) => {
-//                        console.log(res.data)                        
-                        for(var i = 0; i < res.data.length; i++){                           
-//                            console.log("pin", res.data[i]._pin) 
-                            var date = res.data[i]._finishedDate.split('T')
-                            var newDateFormatArr = date[0].split('-')
-                            var newDateFormat = newDateFormatArr[2]+'/'+newDateFormatArr[1]+'/'+newDateFormatArr[0]
-                            this.rentalList.push({id: res.data[i]._id, userId: res.data[i]._userId, pin: res.data[i]._pin, userName: res.data[i]._userName, active: res.data[i]._active, finished: newDateFormat})                                                       
+                    axios.get('http://localhost:9000/getRentalList').then((res) => {                     
+                        for(var i = 0; i < res.data.length; i++){ 
+                            if (res.data[i]._finishedDate !== null){
+                                var date = res.data[i]._finishedDate.split('T')
+                                var newDateFormatArr = date[0].split('-')
+                                var newDateFormat = newDateFormatArr[2]+'/'+newDateFormatArr[1]+'/'+newDateFormatArr[0]
+                                this.rentalList.push({id: res.data[i]._id, userId: res.data[i]._userId, pin: res.data[i]._pin, userName: res.data[i]._userName, active: res.data[i]._active, finished: newDateFormat}) 
+                            }
+                            else {
+                                var date = res.data[i]._createdDate.split('T')
+                                var dateFormatArr = date[0].split('-')
+                                var dateFormat = dateFormatArr[2]+'/'+dateFormatArr[1]+'/'+dateFormatArr[0]
+                                this.rentalList.push({d: res.data[i]._id, userId: res.data[i]._userId, pin: res.data[i]._pin, userName: res.data[i]._userName, active: res.data[i]._active, created: dateFormat})
+                            }
                         }   
                         this.props.successSignInHandler(data.data[0]._firstName, data.data[0]._lastName, data.data[0]._email, data.data[0]._password, data.data[0]._role, this.rentalList) 
                     })
                 }
-//                console.log("sdhdh", this.rentalList) 
-                
+                else{
+                    axios.post('http://localhost:9000/getUserRentals', null, {
+                        params: {
+                            email: this.state.email 
+                        }
+                    }).then((res) => {
+//                        console.log(res.data)
+                        for (var i = 0; i < res.data.length; i++){
+                            if (res.data[i]._finishedDate !== null){
+                                var date = res.data[i]._finishedDate.split('T')
+                                var newDateFormatArr = date[0].split('-')
+                                var newDateFormat = newDateFormatArr[2]+'/'+newDateFormatArr[1]+'/'+newDateFormatArr[0]
+                                this.rentalList.push({id: res.data[i]._id, pin: res.data[i]._pin, finishedDate: newDateFormat})   
+                            }
+                            else {
+                                var date = res.data[i]._createdDate.split('T')
+                                var dateFormatArr = date[0].split('-')
+                                var dateFormat = dateFormatArr[2]+'/'+dateFormatArr[1]+'/'+dateFormatArr[0]
+                                this.rentalList.push({id: res.data[i]._id, pin: res.data[i]._pin, created: dateFormat})   
+                            }
+                        }
+                        this.props.successSignInHandler(data.data[0]._firstName, data.data[0]._lastName, data.data[0]._email, data.data[0]._password, data.data[0]._role, this.rentalList) 
+                    })
+                }   
             }
         })
     }
