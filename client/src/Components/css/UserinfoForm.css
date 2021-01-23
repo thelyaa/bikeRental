@@ -1,0 +1,64 @@
+.userinfoForm-block_left{
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.userinfoForm-block_left input{
+    border: 3px solid;
+    border-color: darkcyan
+}
+
+.userinfoForm-block_left_firstName{
+    margin-left: 15px
+}
+
+.userinfoForm-block_left_lastName{
+    margin-left: 17px
+}
+
+.userinfoForm-block_left_email{
+    margin-left: 46px
+}
+
+.userinfoForm-block_left_password{
+    margin-left: 24px
+}
+
+.userinfoForm-block_left_buttonDiv{
+    margin-left: 190px
+}
+
+.userinfoForm-block_left_buttonDiv button{
+    margin-top: 10px;
+    width: 70px;
+    background-color: cadetblue;
+    height: 30px;
+    color: white;
+    border-radius: 5px
+}
+
+.userinfoForm-block_right{
+    margin-left: 50%;
+    margin-top: -17.5%
+}
+
+.userinfoForm-block_right table{
+    width: 300px;
+    border: 2px solid;
+    border-color: cadetblue
+}
+
+.userinfoForm-block_right th{
+    width: 100px;
+    border: 1px solid white;
+    background-color: cadetblue;
+    color: white
+}
+
+.userinfoForm-block_right td{
+    text-align: center;
+    width: 150px;
+    background-color: lightsteelblue;
+    color: black;
+    padding-left: 5px
+}

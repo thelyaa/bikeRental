@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './css/RentalListForm.css'
 
 export default class RentalListForm extends React.Component {
  
@@ -10,6 +11,7 @@ export default class RentalListForm extends React.Component {
     constructor(props){
         super(props);
         this.onInputChange = this.onInputChange.bind(this)
+        this.finishRental = this.finishRental.bind(this)
     }
     
     onInputChange(event){
@@ -19,17 +21,21 @@ export default class RentalListForm extends React.Component {
     }
     
     finishRental = (e) => {
-        console.log(this.state.pin)
+//        console.log(this.state.pin)
         axios.post('http://localhost:9000/finishRental', null, {
             params: {
                 pin: this.state.pin            
             }
-        }).then((data) => {})
+        }).then((data) => {
+            var user = "admin"
+            this.props.getRentalListHandler("", "", user)
+        })
     }
 
     render(){
         return(
-            <div>
+            <div className="rentalList-block">
+                <h3>All Rentals</h3>
                 <table>
                     <tr>
                         <th>User</th>
@@ -59,14 +65,14 @@ export default class RentalListForm extends React.Component {
                 })}
                 </table>
             
-                <div>
+                <div className="rentalList-block_PIN">
                     <input 
                         type="text" 
                         onChange={this.onInputChange}
                         name="pin"
                         value={this.state.pin}
                     />
-                    <button onClick={this.finishRental}>Set PIN</button>
+                    <p><button onClick={this.finishRental}>Set PIN</button></p>
                 </div>
             </div>
         )

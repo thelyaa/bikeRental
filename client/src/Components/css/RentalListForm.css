@@ -1,0 +1,42 @@
+.rentalList-block{
+    margin-top: 3%;
+    margin-left: 30%
+}
+
+.rentalList-block table{
+    width: 500px;
+    border: 2px solid;
+    border-color: cadetblue
+}
+
+.rentalList-block th{
+    width: 350px;
+    border: 1px solid white;
+    background-color: cadetblue;
+    color: white
+}
+
+.rentalList-block td{
+    text-align: center;
+    border: 1px solid white;
+    background-color: lightsteelblue
+}
+
+.rentalList-block_PIN{
+    margin-top: -43.5%;
+    margin-left: 50%;
+}
+
+.rentalList-block_PIN input{
+    border: 3px solid;
+    border-color: darkcyan
+}
+
+.rentalList-block_PIN button{
+    margin-left: 100px;
+    width: 70px;
+    background-color: cadetblue;
+    height: 30px;
+    color: white;
+    border-radius: 5px
+}

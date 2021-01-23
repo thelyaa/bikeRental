@@ -56,7 +56,7 @@ app.post('/registrateUser', (req, res) => {
 
 app.get('/getRentalList', (req, res) => {
     RentalList.find({}, function(err, result){
-        console.log("rentalist", result)
+//        console.log("rentalist", result)
         res.send(result)
     })
 })
@@ -72,7 +72,11 @@ app.post('/getUserName', (req, res) => {
 app.post('/finishRental', (req, res) => {
     var datetime = new Date();
     RentalList.updateOne({_pin: req.query.pin}, {_active: false, _finishedDate: datetime}, function(err, result){
-        console.log(result)
+        RentalList.find({_pin: req.query.pin}, function(err, data){
+            console.log("finish", data)
+            res.send("success")
+        })
+        
     })
 })
 
@@ -80,7 +84,7 @@ app.post('/getUserRentals', (req, res) => {
    UserModel.find({_email: req.query.email}, function(err, result){
        console.log(result[0]._id)
        RentalList.find({_userId: result[0]._id}, function(err, data){
-           console.log(data)
+//           console.log(data)
            res.send(data)
        })
    }) 
@@ -95,7 +99,10 @@ app.post('/rentalBike', (req, res) => {
     RentalList.find({_pin: rnd, _active: false}, function(err, rental){
         UserModel.find({_email: req.query.email}, function(err, result){
             RentalList.find({_userId: result[0]._id, _active: true}, function(err, active){
-                if (active.length > 0) {res.send("error"); console.log("ac", active)}
+                if (active.length > 0) {
+                    res.send("error"); 
+//                  console.log("ac", active)
+                }
                 else{
                     RentalList.create({
                         _pin: rnd,
@@ -105,6 +112,8 @@ app.post('/rentalBike', (req, res) => {
                         _createdDate: datetime,
                         _active: true
                     }, function(err, data){
+                        console.log(data)
+                        res.send("success")
                         if (err) console.log(err)
                     })
                 }

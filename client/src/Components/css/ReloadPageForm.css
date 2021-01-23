@@ -1,0 +1,14 @@
+.reloadPage-block{
+    margin-left: 45%;
+    margin-top: 10%
+}
+
+.reloadPage-block button{
+    margin-top: 20px;
+    width: 70px;
+    background-color: cadetblue;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+    margin-left: -5px
+}

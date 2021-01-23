@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './css/LoginForm.css'
 
 export default class LoginForm extends React.Component {
  
@@ -81,7 +82,7 @@ export default class LoginForm extends React.Component {
     
     render(){
         return(
-            <div>
+            <div className="loginForm-block">
                 <p>
                     <label>
                         E-Mail
@@ -91,6 +92,7 @@ export default class LoginForm extends React.Component {
                         value={this.state.email}
                         onChange={this.onInputChange}
                         name="email"
+                        className="loginForm-block_email"
                     />
                 </p>
                 <p>
@@ -102,9 +104,10 @@ export default class LoginForm extends React.Component {
                         value={this.state.password}
                         onChange={this.onInputChange}
                         name="password"
+                        className="loginForm-block_password"
                     />
                 </p>
-                <div>
+                <div className="loginForm-block_buttonDiv">
                     <button onClick={this.signInFunction}>Sign In</button>
                     <button onClick={this.props.registerFormHandler}>Sign Up</button>
                 </div>

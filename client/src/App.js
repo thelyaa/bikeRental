@@ -3,6 +3,7 @@ import LoginForm from './Components/LoginForm';
 import RegisterForm from './Components/RegisterForm';
 import UserinfoForm from './Components/UserinfoForm';
 import RentalListForm from './Components/RentalListForm'
+import ReloadPageForm from './Components/ReloadPageForm'
 
 export default class App extends React.Component {
     
@@ -13,15 +14,29 @@ export default class App extends React.Component {
         email: "",
         password: "",
         role: "",
-        rentalList: []
+        rentalList: [],
+        str: "",
+        user: ""
     }
     
     setUserData(firstName, lastName, email, password, role, rentalList){
         if (role === "admin") this.setState({currentScreen: 3, rentalList: rentalList})
         else this.setState({firstName: firstName, lastName: lastName, email: email, password: password, currentScreen: 2, role: role, rentalList: rentalList})
-        console.log("rental", this.state.rentalList)
+//        console.log("rental", this.state.rentalList)
+    }
+
+    reloadPage(str, email, user){
+        console.log(user)
+        this.setState({currentScreen: 4, str: str, email: email, user: user})   
     }
     
+    setRentalList(user, rentalList){
+        if (user === "admin")
+            this.setState({currentScreen: 3, rentalList: rentalList})
+        else this.setState({currentScreen: 2, rentalList: rentalList})
+//        console.log("rental", rentalList)
+    }
+
     render(){
         return(
             <div>
@@ -38,11 +53,21 @@ export default class App extends React.Component {
                     lastName={this.state.lastName}
                     email={this.state.email}
                     password={this.state.password}
-                    rentalList={this.state.rentalList}/>
+                    rentalList={this.state.rentalList}
+                    userinfoHandler={this.reloadPage.bind(this)}/>
                 ):""}
                 {this.state.currentScreen === 3 ? (
                     <RentalListForm 
-                    rentalList={this.state.rentalList}/>
+                    rentalList={this.state.rentalList}
+                    user={this.state.user}
+                    getRentalListHandler={this.reloadPage.bind(this)}/>
+                ):""}
+                {this.state.currentScreen === 4 ? (
+                    <ReloadPageForm 
+                    str={this.state.str}
+                    email={this.state.email}
+                    user={this.state.user}
+                    cancelHandler={this.setRentalList.bind(this)}/>
                 ):""}
             </div>
         )

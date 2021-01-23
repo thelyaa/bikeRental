@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './css/RegisterForm.css'
 
 export default class RegisterForm extends React.Component {
  
@@ -44,7 +45,8 @@ export default class RegisterForm extends React.Component {
     
     render(){
         return(
-            <div>
+            <div className="registerForm-block">
+                <h3>Registration</h3>
                 <p>
                     <label>
                         First Name
@@ -54,6 +56,7 @@ export default class RegisterForm extends React.Component {
                         value={this.state.firstName}
                         onChange={this.onInputChange}
                         name="firstName"
+                        className="registerForm-block_firstName"
                     />
                 </p>
                 <p>
@@ -65,6 +68,7 @@ export default class RegisterForm extends React.Component {
                         value={this.state.lastName}
                         onChange={this.onInputChange}
                         name="lastName"
+                        className="registerForm-block_lastName"
                     />
                 </p>
                 <p>
@@ -76,6 +80,7 @@ export default class RegisterForm extends React.Component {
                         value={this.state.email}
                         onChange={this.onInputChange}
                         name="email"
+                        className="registerForm-block_email"
                     />
                 </p>
                 <p>
@@ -87,6 +92,7 @@ export default class RegisterForm extends React.Component {
                         value={this.state.password}
                         onChange={this.onInputChange}
                         name="password"
+                        className="registerForm-block_password"
                     />
                 </p>
                 <p>
@@ -98,9 +104,10 @@ export default class RegisterForm extends React.Component {
                         value={this.state.repeatPassword}
                         onChange={this.onInputChange}
                         name="repeatPassword"
+                        className="registerForm-block_repeatPassword"
                     />
                 </p>
-                <div>
+                <div className="registerForm-block_buttonDiv">
                     <button onClick={this.registerFunction}>OK</button>
                     <button onClick={this.props.cancelHandler}>Cancel</button>
                 </div>

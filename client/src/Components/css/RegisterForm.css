@@ -1,0 +1,44 @@
+.registerForm-block{
+    margin-left: 40%;
+    margin-top: 5%
+}
+
+.registerForm-block input{
+    border: 3px solid;
+    border-color: darkcyan
+}
+
+.registerForm-block_firstName{
+    margin-left: 60px
+}
+
+.registerForm-block_lastName{
+    margin-left: 61px
+}
+
+.registerForm-block_email{
+    margin-left: 90px
+}
+
+.registerForm-block_password{
+    margin-left: 68px
+}
+
+.registerForm-block_repeatPassword{
+    margin-left: 14px
+}
+
+.registerForm-block_buttonDiv{
+    margin-left: 145px;
+    width: 300px
+}
+
+.registerForm-block_buttonDiv button{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70px;
+    background-color: cadetblue;
+    height: 30px;
+    color: white;
+    border-radius: 5px
+}
