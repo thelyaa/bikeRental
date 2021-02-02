@@ -7,7 +7,7 @@ const cors = require('cors');
 const Math = require('mathjs')
 app.use(cors());
 
-mongoose.connect('mongodb+srv://thelyaa:Fkm,tlj1@cluster0.lxn7u.mongodb.net/bikeRental', {
+mongoose.connect('mongodb+srv://<nickname>:<password>@cluster0.lxn7u.mongodb.net/bikeRental', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
